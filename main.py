@@ -1,7 +1,4 @@
-from formageometrica import Circulo, Quadrado, Triangulo, Trapezio, Losango, calcular_circulo, calcular_losango, calcular_quadrado, calcular_trapezio, calcular_triangulo
-import os
-import platform
-
+from formageometrica import calcular_circulo, calcular_losango, calcular_quadrado, calcular_trapezio, calcular_triangulo
 def main():
     while True:
         escolha = int(input('1 - Quadrado\n2 - Circulo\n3 - Triângulo\n4 - Trapézio\n5 - Losango\n0 - Para encerrar o programa\nDigite qual forma deseja calcular: '))
