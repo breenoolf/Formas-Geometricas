@@ -62,10 +62,11 @@ def calcular_triangulo():
             limpar_terminal()
     except:
         print('ERRO! Insira os valores corretamente.')
+        limpar_terminal()
 def calcular_trapezio():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
-        tra1 = input('Digite o valor da base menor, base maiorr, dos dois lados e da altura: ')
+        tra1 = input('Digite o valor da base menor, base maior, dos dois lados e da altura: ')
         base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
         tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
         if calculo == 1:
