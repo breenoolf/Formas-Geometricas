@@ -20,14 +20,13 @@ Este projeto utiliza as seguintes bibliotecas do Python:
 
 # COMO USAR
 - Clone este repositório para o seu ambiente local:
-  . git clone https://github.com/seu-usuario/Formas-Geometricas.git
+  git clone https://github.com/seu-usuario/Formas-Geometricas.git
 
 - Navegue até o diretório do projeto:
-  . cd Formas-Geometricas
+  cd Formas-Geometricas
 
 - Execute o script principal:
-  . python main.py
-  . Siga as instruções no terminal para escolher a forma geométrica e o tipo de cálculo que deseja realizar.
+  python main.py e siga as instruções no terminal para escolher a forma geométrica e o tipo de cálculo que deseja realizar.
 
 # CONTATO
 Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
