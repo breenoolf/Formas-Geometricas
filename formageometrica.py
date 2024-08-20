@@ -2,6 +2,18 @@ from abc import ABC, abstractmethod
 import math
 import os
 import platform
+# class FormaGeometrica3D(ABC):
+#     @abstractmethod
+#     def calculo_area (self):
+#         pass
+#     @abstractmethod
+#     def calculo_perimetro (self):
+#         pass
+#     @abstractmethod
+#     def calculo_volume (self):
+#         pass
+#     def area_lateral (self):
+#         pass
 class FormaGeometrica2D (ABC):
     @abstractmethod
     def calculo_area (self):
@@ -9,22 +21,10 @@ class FormaGeometrica2D (ABC):
     @abstractmethod
     def calculo_perimetro (self):
         pass
-class FormaGeometrica3D(ABC):
-    @abstractmethod
-    def calculo_area (self):
-        pass
-    @abstractmethod
-    def calculo_perimetro (self):
-        pass
-    @abstractmethod
-    def calculo_volume (self):
-        pass
-    def area_lateral (self):
-        pass
     
 def calcular_quadrado():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
+        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
         q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
         if calculo == 1:
             print(q1.calculo_area())
@@ -37,8 +37,8 @@ def calcular_quadrado():
         limpar_terminal()
 def calcular_circulo(self):
     try:
+        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
         c1 = Circulo(int(input('Digite o valor do raio deste cícrulo: ')))
-        calculo = input('Qual cálculo deseja fazer? ')
         if calculo == 1:
             c1.calculo_area()
             limpar_terminal()
@@ -50,7 +50,7 @@ def calcular_circulo(self):
         limpar_terminal()
 def calcular_triangulo():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
         t1 = (input('Digite o valor da base e da altura deste triângulo: '))
         base_str, altura_str = map(int, t1.split())
         t1 = Triangulo(base_str, altura_str)
@@ -65,7 +65,7 @@ def calcular_triangulo():
         limpar_terminal()
 def calcular_trapezio():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
+        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
         tra1 = input('Digite o valor da base menor, base maior, dos dois lados e da altura: ')
         base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
         tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
@@ -80,7 +80,7 @@ def calcular_trapezio():
             limpar_terminal()
 def calcular_losango():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
+        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
         l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
         diagonal_maior, diagonal_menor, lado = map(int, l1.split())
         l1 = Losango(diagonal_maior, diagonal_menor, lado)
@@ -227,73 +227,100 @@ class Losango (FormaGeometrica2D):
 def calcular_quadrado():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
-        q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
         if calculo == 1:
+            q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
             print(q1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
+            q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
             print(q1.calculo_perimetro())
             limpar_terminal()
-    except Exception as e:
-        print(f'ERRO! Insira os valores corretamente. {e}')
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
 def calcular_circulo():
     try:
-        c1 = Circulo(int(input('Digite o valor do raio deste círculo: ')))
         calculo = int(input('Qual cálculo deseja fazer? (1 - Área, 2 - Perímetro): '))
         if calculo == 1:
+            c1 = Circulo(int(input('Digite o valor do raio deste círculo: ')))
             print(c1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
+            c1 = Circulo(int(input('Digite o valor do raio deste círculo: ')))
             print(c1.calculo_perimetro())
             limpar_terminal()
         else:
-            print('Cálculo inválido.')
-    except Exception as e:
-        print(f'ERRO! Insira os valores corretamente. {e}')
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
 
 def calcular_triangulo():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
-        t1 = (input('Digite o valor da base e da altura deste triângulo: '))
-        base_str, altura_str = map(int, t1.split())
-        t1 = Triangulo(base_str, altura_str)
         if calculo == 1:
+            t1 = (input('Digite o valor da base e da altura deste triângulo: '))
+            base_str, altura_str = map(int, t1.split())
+            t1 = Triangulo(base_str, altura_str)
             print(t1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
+            t1 = (input('Digite o valor da base e da altura deste triângulo: '))
+            base_str, altura_str = map(int, t1.split())
+            t1 = Triangulo(base_str, altura_str)
             print(t1.calculo_perimetro())
             limpar_terminal()
-    except Exception as e:
-        print(f'ERRO! Insira os valores corretamente. {e}')
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
 def calcular_trapezio():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
-        tra1 = input('Digite o valor da base menor, base maiorr, dos dois lados e da altura: ')
-        base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
-        tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
         if calculo == 1:
+            tra1 = input('Digite o valor da base menor, base maiorr, dos dois lados e da altura: ')
+            base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
+            tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
             print(tra1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
+            tra1 = input('Digite o valor da base menor, base maior, dos dois lados e da altura: ')
+            base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
+            tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
             print(tra1.calculo_perimetro())
             limpar_terminal()
-    except Exception as e:
-        print(f'ERRO! Insira os valores corretamente. {e}')
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
         limpar_terminal()
 def calcular_losango():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
-        l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
-        diagonal_maior, diagonal_menor, lado = map(int, l1.split())
-        l1 = Losango(diagonal_maior, diagonal_menor, lado)
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro\nValor escolhido: '))
         if calculo == 1:
+            l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
+            diagonal_maior, diagonal_menor, lado = map(int, l1.split())
+            l1 = Losango(diagonal_maior, diagonal_menor, lado)
             print(l1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
+            l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
+            diagonal_maior, diagonal_menor, lado = map(int, l1.split())
+            l1 = Losango(diagonal_maior, diagonal_menor, lado)
             print(l1.calculo_perimetro())
             limpar_terminal()
-    except:
-        print('ERRO! Insira todos os valores')
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
         limpar_terminal()
 def limpar_terminal():
     input('Digite ENTER para voltar ao menu principal')
