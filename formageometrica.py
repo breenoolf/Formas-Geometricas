@@ -48,21 +48,21 @@ def calcular_circulo(self):
     except:
         print('ERRO! Insira os valores corretamente.')
         limpar_terminal()
-def calcular_triangulo():
-    try:
-        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
-        t1 = (input('Digite o valor da base e da altura deste triângulo: '))
-        base_str, altura_str = map(int, t1.split())
-        t1 = Triangulo(base_str, altura_str)
-        if calculo == 1:
-            print(t1.calculo_area())
-            limpar_terminal()
-        elif calculo == 2:
-            print(t1.calculo_perimetro())
-            limpar_terminal()
-    except:
-        print('ERRO! Insira os valores corretamente.')
-        limpar_terminal()
+# def calcular_triangulo():
+#     try:
+#         calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
+#         t1 = (input('Digite o valor da base e da altura deste triângulo: '))
+#         base_str, altura_str = map(int, t1.split())
+#         t1 = Triangulo(base_str, altura_str)
+#         if calculo == 1:
+#             print(t1.calculo_area())
+#             limpar_terminal()
+#         elif calculo == 2:
+#             print(t1.calculo_perimetro())
+#             limpar_terminal()
+#     except:
+#         print('ERRO! Insira os valores corretamente.')
+#         limpar_terminal()
 def calcular_trapezio():
     try:
         calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
@@ -124,7 +124,7 @@ class Quadrado (FormaGeometrica2D):
         area = self.lado**2
         return f'O valor da área deste quadrado é {area}'
 
-class Triangulo (FormaGeometrica2D):
+class TrianguloEquilatero (FormaGeometrica2D):
     def __init__(self, base, altura):
         self.base = base
         self.altura = altura
@@ -143,7 +143,56 @@ class Triangulo (FormaGeometrica2D):
     def calculo_perimetro(self):
         perimetro = self.base * 3
         return f'O valor do perímetro deste triângulo é {perimetro}'
+class TrianguloRetangulo(FormaGeometrica2D):
+    def __init__(self, cateto1, cateto2):
+        self.cateto1 = cateto1
+        self.cateto2 = cateto2
+        super().__init__()
+    def get_cateto1(self):
+        return self.cateto1
+    def set_cateto1 (self, novo_cateto1):
+        self.cateto1 = novo_cateto1
+    def get_cateto2(self):
+        return self.cateto2
+    def set_cateto(self, novo_cateto2):
+        self.cateto2 = novo_cateto2
+    def calculo_area(self):
+        area = (self.cateto1 * self.cateto2)/2
+        return f'O valor da área deste triângulo é {area}'
+    def calculo_perimetro(self):
+        hipotenusa = math.sqrt(self.cateto1**2 + self.cateto2**2)
+        perimetro = self.cateto1 + self.cateto2 + hipotenusa
+        return perimetro
 
+class TrianguloIsoceles(FormaGeometrica2D):
+    def __init__(self, lado, base, altura):
+        self.altura  = altura
+        self.base = base
+        self.lado = lado
+        super().__init__()
+    def get_base(self):
+        return self.base
+    def set_base(self, nova_base):
+        self.base = nova_base
+    def get_lado(self):
+        return self.lado
+    def set_lado(self, novo_lado):
+        self.lado = novo_lado
+    def calculo_area(self):
+        area = (self.base * self.altura)/2
+        return area
+    def calculo_perimetro(self):
+        perimetro = self.base + (self.lado*2)
+        return perimetro
+
+class TrianguloEscaleno(FormaGeometrica2D):
+    def __init__(self, lado1, lado2, base, altura):
+        self.lado1 = lado1
+        self.lado2 = lado2
+        self.base = base
+        self.altura = altura
+        super().__init__()
+    
 class Elipse(FormaGeometrica2D):
     def __init__(self, raio_maior, raio_menor):
         self.raio_maior = raio_maior
@@ -259,19 +308,25 @@ def calcular_circulo():
         print('ERRO! Insira apenas valores inteiros.')
         limpar_terminal()
 
-def calcular_triangulo():
+
+
+
+
+
+
+def calcular_triangulo_equilatero():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
         if calculo == 1:
             t1 = (input('Digite o valor da base e da altura deste triângulo: '))
             base_str, altura_str = map(int, t1.split())
-            t1 = Triangulo(base_str, altura_str)
+            t1 = TrianguloEquilatero(base_str, altura_str)
             print(t1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
             t1 = (input('Digite o valor da base e da altura deste triângulo: '))
             base_str, altura_str = map(int, t1.split())
-            t1 = Triangulo(base_str, altura_str)
+            t1 = TrianguloEquilatero(base_str, altura_str)
             print(t1.calculo_perimetro())
             limpar_terminal()
         else:
@@ -280,6 +335,69 @@ def calcular_triangulo():
     except ValueError:
         print('ERRO! Insira apenas valores inteiros.')
         limpar_terminal()
+def calcular_triangulo_retangulo():
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? '))
+        if calculo == 1:
+            t1 = (input('Digite o valor dos catetos deste triângulo: '))
+            cateto1, cateto2 = map(int, t1.split())
+            t1 = TrianguloEquilatero(cateto1, cateto2)
+            print(t1.calculo_area())
+            limpar_terminal()
+        elif calculo == 2:
+            t1 = (input('Digite o valor da base e da altura deste triângulo: '))
+            cateto1, cateto2 = map(int, t1.split())
+            t1 = TrianguloEquilatero(cateto1, cateto2)
+            print(t1.calculo_perimetro())
+            limpar_terminal()
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
+
+
+
+def calcular_triangulo_isoceles():
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? '))
+        if calculo == 1:
+            t1 = (input('Digite o valor da e da altura deste triângulo: '))
+            base, altura = map(int, t1.split())
+            t1 = TrianguloIsoceles(base, altura)
+            print(t1.calculo_area())
+            limpar_terminal()
+        elif calculo == 2:
+            t1 = (input('Digite o valor da base e do lado deste triângulo: '))
+            base, lado = map(int, t1.split())
+            t1 = TrianguloIsoceles(base, lado)
+            print(t1.calculo_perimetro())
+            limpar_terminal()
+        else:
+            print('ERRO! Digite um dos valores correspondentes.')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
+
+def calcular_triangulo():
+    try:
+        triangulo = int(input('Digite qual tipo de triângulo deseja calcular: '))
+        if triangulo == 1:
+            calcular_triangulo_equilatero()
+        elif triangulo == 2:
+            calcular_triangulo_retangulo()
+        elif triangulo == 3:
+            calcular_triangulo_isoceles()
+        else:
+            print('ERRO! Opção inválida, escolha uma das opções disponíveis')
+            limpar_terminal()
+    except ValueError:
+        print('ERRO! Insira apenas valores inteiros.')
+        limpar_terminal()
+
+
 def calcular_trapezio():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
