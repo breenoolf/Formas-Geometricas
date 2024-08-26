@@ -2,18 +2,7 @@ from abc import ABC, abstractmethod
 import math
 import os
 import platform
-# class FormaGeometrica3D(ABC):
-#     @abstractmethod
-#     def calculo_area (self):
-#         pass
-#     @abstractmethod
-#     def calculo_perimetro (self):
-#         pass
-#     @abstractmethod
-#     def calculo_volume (self):
-#         pass
-#     def area_lateral (self):
-#         pass
+
 class FormaGeometrica2D (ABC):
     @abstractmethod
     def calculo_area (self):
@@ -21,78 +10,84 @@ class FormaGeometrica2D (ABC):
     @abstractmethod
     def calculo_perimetro (self):
         pass
+
+class FormaGeometrica3D(ABC):
+     @abstractmethod
+     def calculo_area (self):
+         pass
+     @abstractmethod
+     def calculo_volume (self):
+         pass
+     def area_lateral (self):
+         pass
+
+class Cubo(FormaGeometrica3D):
+    def __init__(self, aresta):
+        self.aresta = aresta
+        super().__init__()
+    def calculo_area(self):
+        area = (self.aresta**2) * 6
+        return f'O valor da área desse cubo é {area}'
+    def calculo_volume(self):
+        volume = self.aresta**3
+        return f' O valor do volume desse cubo é {volume}'
     
-def calcular_quadrado():
+class Paralelepipedo(FormaGeometrica3D):
+    def __init__(self, comprimento, altura, largura):
+        self.comprimento = comprimento
+        self.altura = altura
+        self.largura = largura
+        super().__init__()
+    def calculo_face_maior(self):
+        resultado = 2*(self.comprimento * self.largura)
+        return resultado
+    def calculo_face_menor(self):
+        resultado = 2*(self.comprimento * self.altura)
+        return resultado
+    def calculo_face_lateral(self):
+        resultado = 2*(self.largura * self.altura)
+        return resultado
+    def calculo_area(self):
+        area = self.calculo_face_maior() + self.calculo_face_menor() + self.calculo_face_lateral()
+        return f'A área desse paralelepípedo é {area}'
+    def calculo_volume(self):
+        volume = self.comprimento * self.altura * self.largura
+        return f'O volume desse paralelepípedo é {volume}'
+
+def calcular_paralelepido():
     try:
-        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
-        q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Volume '))
         if calculo == 1:
-            print(q1.calculo_area())
+            para1 = input('Digite o valor do comprimento, da altura e da largura deste paralelepípedo separado por espaço: ')
+            comprimento, altura, largura = map(int,  para1.split())
+            p1 = Paralelepipedo(comprimento, altura, largura)
+            print(p1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
-            print(q1.calculo_perimetro())
+            para1 = input('Digite o valor do comprimento, da altura e da largura deste paralelepípedo separado por espaço: ')
+            comprimento, altura, largura = map(int, para1.split())
+            p1 = Paralelepipedo(comprimento, altura, largura)
+            print(p1.calculo_volume())
             limpar_terminal()
     except:
         print('ERRO! Insira os valores corretamente.')
         limpar_terminal()
-def calcular_circulo(self):
+
+def calcular_cubo():
     try:
-        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
-        c1 = Circulo(int(input('Digite o valor do raio deste cícrulo: ')))
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Volume'))
+        cubo1 = Cubo(int(input('Digite o valor do raio da aresta desse cubo: ')))
         if calculo == 1:
-            c1.calculo_area()
+            print(cubo1.calculo_area())
             limpar_terminal()
         elif calculo == 2:
-            print(c1.calculo_perimetro())
+            print(cubo1.calculo_volume())
             limpar_terminal()
     except:
         print('ERRO! Insira os valores corretamente.')
         limpar_terminal()
-# def calcular_triangulo():
-#     try:
-#         calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
-#         t1 = (input('Digite o valor da base e da altura deste triângulo: '))
-#         base_str, altura_str = map(int, t1.split())
-#         t1 = Triangulo(base_str, altura_str)
-#         if calculo == 1:
-#             print(t1.calculo_area())
-#             limpar_terminal()
-#         elif calculo == 2:
-#             print(t1.calculo_perimetro())
-#             limpar_terminal()
-#     except:
-#         print('ERRO! Insira os valores corretamente.')
-#         limpar_terminal()
-def calcular_trapezio():
-    try:
-        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
-        tra1 = input('Digite o valor da base menor, base maior, dos dois lados e da altura: ')
-        base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
-        tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
-        if calculo == 1:
-            print(tra1.calculo_area())
-            limpar_terminal()
-        elif calculo == 2:
-            print(tra1.calculo_perimetro())
-            limpar_terminal()
-    except:
-            print('ERRO! Insira todos os valores')
-            limpar_terminal()
-def calcular_losango():
-    try:
-        calculo = input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro')
-        l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
-        diagonal_maior, diagonal_menor, lado = map(int, l1.split())
-        l1 = Losango(diagonal_maior, diagonal_menor, lado)
-        if calculo == 1:
-            print(l1.calculo_area())
-            limpar_terminal()
-        elif calculo == 2:
-            print(l1.calculo_perimetro())
-            limpar_terminal()
-    except:
-        print('ERRO! Insira todos os valores')
-        limpar_terminal()
+
+    
 
 class Circulo(FormaGeometrica2D):
     def __init__(self, raio):
@@ -294,9 +289,55 @@ class Losango (FormaGeometrica2D):
         perimetro = self.lado*4
         return f'O valor do perímetro deste losango é {perimetro}'
     
+def calcular_circulo(self):
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
+        c1 = Circulo(int(input('Digite o valor do raio deste cícrulo: ')))
+        if calculo == 1:
+            c1.calculo_area()
+            limpar_terminal()
+        elif calculo == 2:
+            print(c1.calculo_perimetro())
+            limpar_terminal()
+    except:
+        print('ERRO! Insira os valores corretamente.')
+        limpar_terminal()
+
+def calcular_trapezio():
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro'))
+        tra1 = input('Digite o valor da base menor, base maior, dos dois lados e da altura: ')
+        base_menor, base_maior, lado1, lado2, altura = map(int, tra1.split())
+        tra1 = Trapezio(base_menor, base_maior, lado1, lado2, altura)
+        if calculo == 1:
+            print(tra1.calculo_area())
+            limpar_terminal()
+        elif calculo == 2:
+            print(tra1.calculo_perimetro())
+            limpar_terminal()
+    except:
+            print('ERRO! Insira todos os valores')
+            limpar_terminal()
+            
+def calcular_losango():
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? \n1 - Área | 2 - Perímetro '))
+        l1 = input('Digite o valor da diagonal maior e menor, e do lado:')
+        diagonal_maior, diagonal_menor, lado = map(int, l1.split())
+        l1 = Losango(diagonal_maior, diagonal_menor, lado)
+        if calculo == 1:
+            print(l1.calculo_area())
+            limpar_terminal()
+        elif calculo == 2:
+            print(l1.calculo_perimetro())
+            limpar_terminal()
+    except:
+        print('ERRO! Insira todos os valores')
+        limpar_terminal()
+    
 def calcular_quadrado():
     try:
-        calculo = int(input('Qual cálculo deseja fazer? '))
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Perímetro '))
         if calculo == 1:
             q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
             print(q1.calculo_area())
@@ -304,23 +345,6 @@ def calcular_quadrado():
         elif calculo == 2:
             q1 = Quadrado(int(input('Digite o valor do lado deste quadrado: ')))
             print(q1.calculo_perimetro())
-            limpar_terminal()
-        else:
-            print('ERRO! Digite um dos valores correspondentes.')
-            limpar_terminal()
-    except ValueError:
-        print('ERRO! Insira apenas valores inteiros.')
-        limpar_terminal()
-def calcular_circulo():
-    try:
-        calculo = int(input('Qual cálculo deseja fazer? (1 - Área, 2 - Perímetro): '))
-        if calculo == 1:
-            c1 = Circulo(int(input('Digite o valor do raio deste círculo: ')))
-            print(c1.calculo_area())
-            limpar_terminal()
-        elif calculo == 2:
-            c1 = Circulo(int(input('Digite o valor do raio deste círculo: ')))
-            print(c1.calculo_perimetro())
             limpar_terminal()
         else:
             print('ERRO! Digite um dos valores correspondentes.')
@@ -350,6 +374,7 @@ def calcular_triangulo_equilatero():
     except ValueError:
         print('ERRO! Insira apenas valores inteiros.')
         limpar_terminal()
+
 def calcular_triangulo_retangulo():
     try:
         calculo = int(input('Qual cálculo deseja fazer? '))
@@ -484,3 +509,42 @@ def limpar_terminal():
         os.system('cls') 
     else:
         os.system('clear')
+
+def forma2d():
+    while True:
+        try:
+            escolha = int(input('1 - Quadrado\n2 - Circulo\n3 - Triângulo\n4 - Trapézio\n5 - Losango\n0 - Para retornar ao menu principal\nDigite qual forma deseja calcular: '))
+            if escolha == 1:
+                calcular_quadrado()
+            elif escolha == 2:
+                calcular_circulo()
+            elif escolha == 3:
+                calcular_triangulo()
+            elif escolha == 4:
+                calcular_trapezio()
+            elif escolha == 5:
+                calcular_losango()
+            elif escolha == 0:
+                break
+            else:
+                print('Escolha indisponível, digite um dos números indicados.')
+                limpar_terminal()
+        except ValueError:
+            print('Entrada inválida! Por favor, digite um número.')
+            limpar_terminal()
+def forma3d():
+    while True:
+        try:
+            escolha = int(input('1 - Cubo\n2 - Paralelepípedo\n0 - Para encerrar o programa\nDigite qual forma deseja calcular: '))
+            if escolha == 1:
+                calcular_cubo()
+            elif escolha == 2:
+                calcular_paralelepido()
+            elif escolha == 0:
+                break
+            else:
+                print('Escolha indisponível, digite um dos números indicados.')
+                limpar_terminal()
+        except ValueError:
+            print('Entrada inválida! Por favor, digite um número.')
+            limpar_terminal()

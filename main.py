@@ -1,18 +1,12 @@
-from formageometrica import calcular_circulo, calcular_losango, calcular_quadrado, calcular_trapezio, calcular_triangulo, limpar_terminal
+from formageometrica import forma2d, forma3d, limpar_terminal
 def main():
     while True:
         try:
-            escolha = int(input('1 - Quadrado\n2 - Circulo\n3 - Triângulo\n4 - Trapézio\n5 - Losango\n0 - Para encerrar o programa\nDigite qual forma deseja calcular: '))
+            escolha = int(input('1 - Formas Bidimensionais\n2 - Formas Tridimensionais\n0 - Para encerrar o programa\nDigite qual tipo de forma deseja calcular: '))
             if escolha == 1:
-                calcular_quadrado()
+                forma2d()
             elif escolha == 2:
-                calcular_circulo()
-            elif escolha == 3:
-                calcular_triangulo()
-            elif escolha == 4:
-                calcular_trapezio()
-            elif escolha == 5:
-                calcular_losango()
+                forma3d()
             elif escolha == 0:
                 break
             else:
