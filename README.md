@@ -11,6 +11,10 @@ O projeto está em fase de desenvolvimento ativo. Novas funcionalidades e melhor
   - Triângulos
   - Trapézios
   - Losangos
+- Cálculo de volume e área de:
+  - Cubos
+  - Paralelepípedos
+  - Cilindros
 # BIBLIOTECAS UTILIZADAS
 Este projeto utiliza as seguintes bibliotecas do Python:
   - math: Para operações matemáticas avançadas.
