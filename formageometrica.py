@@ -27,10 +27,10 @@ class Cubo(FormaGeometrica3D):
         super().__init__()
     def calculo_area(self):
         area = (self.aresta**2) * 6
-        return f'O valor da área desse cubo é {area}'
+        return f'O valor da área desse cubo é {area:.2f}'
     def calculo_volume(self):
         volume = self.aresta**3
-        return f' O valor do volume desse cubo é {volume}'
+        return f' O valor do volume desse cubo é {volume:.2f}'
     
 class Paralelepipedo(FormaGeometrica3D):
     def __init__(self, comprimento, altura, largura):
@@ -49,10 +49,41 @@ class Paralelepipedo(FormaGeometrica3D):
         return resultado
     def calculo_area(self):
         area = self.calculo_face_maior() + self.calculo_face_menor() + self.calculo_face_lateral()
-        return f'A área desse paralelepípedo é {area}'
+        return f'A área desse paralelepípedo é {area:.2f}'
     def calculo_volume(self):
         volume = self.comprimento * self.altura * self.largura
-        return f'O volume desse paralelepípedo é {volume}'
+        return f'O volume desse paralelepípedo é {volume:.2f}'
+
+class Cilindro (FormaGeometrica3D):
+    def __init__(self, raio, altura):
+        self. raio = raio
+        self.altura = altura
+        super().__init__()
+    def calculo_area(self):
+        area = (2*math.pi*self.raio*self.altura) + (2*math.pi*self.raio**2)
+        return f'A área desse cilindro é {area:.2f}'
+    def calculo_volume(self):
+        volume = math.pi * (self.raio**2) * self.altura
+        return f'O volume desse cilindro é {volume:.2f}'
+
+def calcular_cilindro():
+    try:
+        calculo = int(input('Qual cálculo deseja fazer? 1 - Área | 2 - Volume '))
+        if calculo == 1:
+            cili1 = input('Digite o valor do raio e da altura separados por espaço: ')
+            raio, altura = map(int,  cili1.split())
+            ci1 = Cilindro(raio, altura)
+            print(ci1.calculo_area())
+            limpar_terminal()
+        elif calculo == 2:
+            cili1 = input('Digite o valor do raio e da altura separados por espaço: ')
+            raio, altura = map(int, cili1.split())
+            ci1 = Cilindro(raio, altura)
+            print(ci1.calculo_volume())
+            limpar_terminal()
+    except:
+        print('ERRO! Insira os valores corretamente.')
+        limpar_terminal()
 
 def calcular_paralelepido():
     try:
@@ -99,10 +130,10 @@ class Circulo(FormaGeometrica2D):
         self.raio = novo_raio
     def calculo_perimetro(self):
         perimetro = 2 * math.pi * self.raio
-        return f'O valor do perímetro deste círculo é {perimetro}' 
+        return f'O valor do perímetro deste círculo é {perimetro:.2f}' 
     def calculo_area(self):
         area = math.pi * (self.raio**2)
-        return f'O valor da área deste círculo é {area}'
+        return f'O valor da área deste círculo é {area:.2f}'
     
 class Quadrado (FormaGeometrica2D):
     def __init__(self, lado):
@@ -114,10 +145,10 @@ class Quadrado (FormaGeometrica2D):
         self.lado = novo_lado
     def calculo_perimetro(self):
         perimetro = self.lado * 4
-        return f'O valor do perímetro deste quadrado é {perimetro}'
+        return f'O valor do perímetro deste quadrado é {perimetro:.2f}'
     def calculo_area(self):
         area = self.lado**2
-        return f'O valor da área deste quadrado é {area}'
+        return f'O valor da área deste quadrado é {area:.2f}'
 
 class TrianguloEquilatero (FormaGeometrica2D):
     def __init__(self, base, altura):
@@ -134,10 +165,10 @@ class TrianguloEquilatero (FormaGeometrica2D):
         self.altura = nova_alutra
     def calculo_area(self):
         area = (self.base*self.altura)/2
-        return f'O valor da área deste triângulo é {area}'
+        return f'O valor da área deste triângulo é {area:.2f}'
     def calculo_perimetro(self):
         perimetro = self.base * 3
-        return f'O valor do perímetro deste triângulo é {perimetro}'
+        return f'O valor do perímetro deste triângulo é {perimetro:.2f}'
 class TrianguloRetangulo(FormaGeometrica2D):
     def __init__(self, cateto1, cateto2):
         self.cateto1 = cateto1
@@ -153,11 +184,11 @@ class TrianguloRetangulo(FormaGeometrica2D):
         self.cateto2 = novo_cateto2
     def calculo_area(self):
         area = (self.cateto1 * self.cateto2)/2
-        return f'O valor da área deste triângulo é {area}'
+        return f'O valor da área deste triângulo é {area:.2f}'
     def calculo_perimetro(self):
         hipotenusa = math.sqrt(self.cateto1**2 + self.cateto2**2)
         perimetro = self.cateto1 + self.cateto2 + hipotenusa
-        return f'O valor do perimetro deste triângulo é {perimetro}'
+        return f'O valor do perimetro deste triângulo é {perimetro:.2f}'
 class TrianguloIsoceles(FormaGeometrica2D):
     def __init__(self, lado, base, altura):
         self.altura  = altura
@@ -174,10 +205,10 @@ class TrianguloIsoceles(FormaGeometrica2D):
         self.lado = novo_lado
     def calculo_area(self):
         area = (self.base * self.altura)/2
-        return f'O valor da área deste triângulo é {area}'
+        return f'O valor da área deste triângulo é {area:.2f}'
     def calculo_perimetro(self):
         perimetro = self.base + (self.lado*2)
-        return f'O valor do perímetro deste triângulo é {perimetro}'
+        return f'O valor do perímetro deste triângulo é {perimetro:.2f}'
 
 class TrianguloEscaleno(FormaGeometrica2D):
     def __init__(self, lado1, lado2, base):
@@ -204,10 +235,10 @@ class TrianguloEscaleno(FormaGeometrica2D):
     def calculo_area(self):
         altura = int(input('Digite o valor da altura: '))
         area = (self.base*altura)/2
-        return f'O valor da área deste triângulo é {area}'
+        return f'O valor da área deste triângulo é {area:.2f}'
     def calculo_perimetro(self):
         perimetro = self.lado1 + self.lado2 + self.base
-        return f'O valor do perímetro deste triângulo é {perimetro}'
+        return f'O valor do perímetro deste triângulo é {perimetro:.2f}'
     
 class Elipse(FormaGeometrica2D):
     def __init__(self, raio_maior, raio_menor):
@@ -224,10 +255,10 @@ class Elipse(FormaGeometrica2D):
         self.raio_maior = novo_raio_maior
     def calculo_perimetro(self):
         perimetro = 2*(math.pi) * math.sqrt((self.raio_maior * 2 + self.raio_menor * 2) / 2)
-        return f'O valor do perímetro desta elipse é {perimetro}'
+        return f'O valor do perímetro desta elipse é {perimetro:.2f}'
     def calculo_area(self):
         area = math.pi * self.raio_maior * self.raio_menor
-        return f'O valor da área desta elipse é {area}'
+        return f'O valor da área desta elipse é {area:.2f}'
 
 class Trapezio (FormaGeometrica2D):
     def __init__(self, base_menor, base_maior, lado1, lado2, altura):
@@ -259,10 +290,10 @@ class Trapezio (FormaGeometrica2D):
         self.altura = nova_altura
     def calculo_perimetro(self):
         perimetro = self.base_maior + self.base_menor + self.lado1 + self.lado2
-        return f'O valor do perímetro deste trapézio é {perimetro}'
+        return f'O valor do perímetro deste trapézio é {perimetro:.2f}'
     def calculo_area(self):
         area = ((self.base_maior + self.base_menor) * self.altura)/2
-        return f'O valor da área deste trapézio é {area}'
+        return f'O valor da área deste trapézio é {area:.2f}'
 
 class Losango (FormaGeometrica2D):
     def __init__(self, diagonal_maior, diagonal_menor, lado):
@@ -284,10 +315,10 @@ class Losango (FormaGeometrica2D):
         self.lado = novo_lado
     def calculo_area(self):
         area = (self.diagonal_maior * self.diagonal_menor)/2
-        return f'O valor da área deste losango é {area}'
+        return f'O valor da área deste losango é {area:.2f}'
     def calculo_perimetro(self):
         perimetro = self.lado*4
-        return f'O valor do perímetro deste losango é {perimetro}'
+        return f'O valor do perímetro deste losango é {perimetro:.2f}'
     
 def calcular_circulo(self):
     try:
@@ -527,24 +558,25 @@ def forma2d():
             elif escolha == 0:
                 break
             else:
-                print('Escolha indisponível, digite um dos números indicados.')
                 limpar_terminal()
         except ValueError:
-            print('Entrada inválida! Por favor, digite um número.')
+            print(f'Entrada inválida! Digite um dos valores listados')
             limpar_terminal()
 def forma3d():
     while True:
         try:
-            escolha = int(input('1 - Cubo\n2 - Paralelepípedo\n0 - Para encerrar o programa\nDigite qual forma deseja calcular: '))
+            escolha = int(input('1 - Cubo\n2 - Paralelepípedo\n3 - Cilindro\n0 - Para encerrar o programa\nDigite qual forma deseja calcular: '))
             if escolha == 1:
                 calcular_cubo()
             elif escolha == 2:
                 calcular_paralelepido()
+            elif escolha == 3:
+                calcular_cilindro()
             elif escolha == 0:
                 break
             else:
                 print('Escolha indisponível, digite um dos números indicados.')
                 limpar_terminal()
-        except ValueError:
+        except TypeError:
             print('Entrada inválida! Por favor, digite um número.')
             limpar_terminal()

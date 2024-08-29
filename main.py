@@ -1,19 +1,17 @@
-from formageometrica import forma2d, forma3d, limpar_terminal
+from formageometrica import forma2d, forma3d,
 def main():
     while True:
         try:
-            escolha = int(input('1 - Formas Bidimensionais\n2 - Formas Tridimensionais\n0 - Para encerrar o programa\nDigite qual tipo de forma deseja calcular: '))
+            escolha: int = int(input('1 - Formas Bidimensionais\n2 - Formas Tridimensionais\n0 - Para encerrar o programa\nDigite qual tipo de forma deseja calcular: '))
+            if escolha not in range(0, 3):
+                raise ValueError("Opção inválida. Escolha um número entre 0 e 2")
             if escolha == 1:
                 forma2d()
             elif escolha == 2:
                 forma3d()
-            elif escolha == 0:
-                break
             else:
-                print('Escolha indisponível, digite um dos números indicados.')
-                limpar_terminal()
-        except ValueError:
-            print('Entrada inválida! Por favor, digite um número.')
-            limpar_terminal()
+                break
+        except ValueError as e:
+            print(f"Erro: {e}. Por favor, tente novamente.")
 if __name__ == '__main__':
     main()
